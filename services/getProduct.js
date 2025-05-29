@@ -2,7 +2,8 @@ import axios from "axios";
 
 export const getProduct = async (id) => {
     try {
-        const response = await axios.get(`http://localhost:8000/market/product/${id}`);
+        const host = process.env.HOST || 'localhost:8000';
+        const response = await axios.get(`http://${host}market/product/${id}`);
         const data = response.data;
         return data;
     }catch (e) {

@@ -2,7 +2,8 @@ import axios from "axios";
 
 export const removeOrderProduct = async (id) => {
   try{
-      const response = await axios.put('http://localhost:8000/market/product/unorder',{id});
+      const host = process.env.HOST || 'localhost:8000';
+      const response = await axios.put(`http://${host}/market/product/unorder`,{id});
       const data = response.data;
       return data;
   }catch (e) {

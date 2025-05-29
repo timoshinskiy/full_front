@@ -3,7 +3,8 @@ import {toast} from "react-toastify";
 
 export const sendMail = async () => {
     try {
-        const response = await axios.post('http://localhost:8000/auth/sendmail', {
+        const host = process.env.HOST || 'localhost:8000';
+        const response = await axios.post(`http://${host}/auth/sendmail`, {
             email: 'nikitosmorozik@gmail.com',
         })
         toast(response);
