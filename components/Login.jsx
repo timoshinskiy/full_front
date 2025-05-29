@@ -21,14 +21,10 @@ const Login = (props) => {
                 return ;
             }
         }
-        try{
-            const data = await loginAccount(inputObj);
+            loginAccount(inputObj).then(data=>{
             console.log(data);
             dispatch(actionCreator.login({...data}));
-            navigate('/');
-        }catch (e) {
-            toast.error(e);
-        }
+            navigate('/');}).catch(e=>toast.error(e));
     }
     return (
         <div className={'auth-container'}>
