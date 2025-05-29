@@ -7,6 +7,7 @@ import Header from "../components/Header.jsx";
 import {useDispatch, useSelector} from "react-redux";
 import actionCreator from "../services/actionCreator.js";
 import Catalog from "../pages/Catalog.jsx";
+import ('dotenv/config');
 
 const App = () => {
     let {auth} = useSelector(state => state.user);
