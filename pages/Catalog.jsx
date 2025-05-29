@@ -11,7 +11,7 @@ import {deleteProduct} from "../services/deleteProduct.js";
 
 const Catalog = () => {
 
-    let {user} = useSelector(state => state);
+    let user = useSelector(state => state.user);
 
     const [openedProductId, setOpenedProductId] = useState(null);
     const [openEdit, setOpenEdit] = useState(false);
@@ -21,7 +21,7 @@ const Catalog = () => {
     const load = () => {
         if (user.admin_role === true) {
             getAdminCatalog(user.username).then(res => {
-                dispatch(actionCreator.loadProducts(res))
+                dispatch(actionCreator.loadProducts(res));
             }).catch(err => err);
         } else if(user.admin_role === false) {
             getCatalog().then(res => {
@@ -31,7 +31,7 @@ const Catalog = () => {
 
     useEffect(() => {
         load();
-    }, []);
+    }, [Catalog]);
     let {products} = useSelector(state => state.catalog);
 
     const createOrder = (id) => {
@@ -65,6 +65,7 @@ const Catalog = () => {
                 <div className={'catalog-head'}>
                     <h1>Catalog</h1>
                     {user.admin_role === true && <button onClick={() => setOpenCreate(true)}>Add product</button>}
+                    <button onClick={load}>Reload products</button>
                 </div>
                 <div className={'catalog-container'}>
                     {
