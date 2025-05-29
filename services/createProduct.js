@@ -7,7 +7,7 @@ export const createProduct = async (obj) => {
                 throw new Error('Bad inputs!');
             }
         }
-        const host = process.env.HOST || 'localhost:8000';
+        let host = process.env.HOST || 'localhost:8000';
         const response = await axios.post(`http://${host}/market/add`,obj);
         const data = response.data;
         return data

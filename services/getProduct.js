@@ -1,4 +1,5 @@
 import axios from "axios";
+import {meta} from "@eslint/js";
 
 export const getProduct = async (id) => {
     try {
