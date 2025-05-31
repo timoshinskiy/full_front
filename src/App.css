@@ -216,3 +216,7 @@ button.active{
 .basket-item-buttons button:hover{
     background: rgba(0,0,0,0.4);
 }
+.catalog-item img{
+    height: 200px;
+    width: 250px;
+}

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import Modal from "./Modal.jsx";
 import {useDispatch, useSelector} from "react-redux";
 import {createProduct} from "../services/createProduct.js";
@@ -8,6 +8,7 @@ import actionCreator from "../services/actionCreator.js";
 const CreateProductModal = (props) => {
     const {user} = useSelector(state => state);
     const dispatch = useDispatch();
+    const [file,setFile] = useState(null);
     const defaultInput = {
         name: '',
         description: '',
@@ -15,9 +16,13 @@ const CreateProductModal = (props) => {
         price: '0',
     }
     const tryCreate = async () => {
-        const resObj = {...inputObj, creator: user.username, price: Number(inputObj.price)}
-        console.log(resObj);
-        createProduct(resObj).then(res => {
+        const formdata = new FormData();
+        const resObj = {...inputObj, creator: user.username, price: Number(inputObj.price)};
+        formdata.append('file', file);
+        for(let key in resObj){
+            formdata.append(key,resObj[key]);
+        }
+        createProduct(formdata).then(res => {
             toast(res);
             dispatch(actionCreator.addProduct(resObj));
             props.setOpen(false);
@@ -47,6 +52,12 @@ const CreateProductModal = (props) => {
                     color: 'darkblue'
                 }} value={inputObj.full_description}
                           onChange={(e) => setInputObj({...inputObj, full_description: e.target.value})}/>
+            </div>
+            <div className="create-input-box">
+
+                    <label>Enter an image
+                        <input type={'file'} onChange={(e)=>setFile(e.target.files[0])}/>
+                    </label>
             </div>
             <div className="create-buttons">
                 <button className={'active-button'} onClick={tryCreate}>Create</button>

@@ -12,7 +12,6 @@ import {deleteProduct} from "../services/deleteProduct.js";
 const Catalog = () => {
 
     let user = useSelector(state => state.user);
-
     const [openedProductId, setOpenedProductId] = useState(null);
     const [openEdit, setOpenEdit] = useState(false);
     const dispatch = useDispatch();
@@ -30,8 +29,9 @@ const Catalog = () => {
     }
 
     useEffect(() => {
-        load();
-    }, [Catalog]);
+        console.log('catalog')
+        setTimeout(load,1000);
+    }, []);
     let {products} = useSelector(state => state.catalog);
 
     const createOrder = (id) => {
@@ -41,7 +41,7 @@ const Catalog = () => {
         }).catch(e => toast.error(e))
     }
 
-
+    const host = process.env.HOST || 'localhost:8000';
     const removeOrder = (id) => {
         removeOrderProduct(id).then(res=>{
             toast.success(res);
@@ -71,6 +71,7 @@ const Catalog = () => {
                     {
                         products.length !== null && products.map(item => (
                             <div key={item.id} className="catalog-item">
+                                <img src={'http://'+ host + '/' + item.picture} alt={'no item'}/>
                                 <h3 style={{margin: "0"}}>{item.name}</h3>
                                 <h4 style={{margin: "0"}}>{item.description}</h4>
                                 <h4 style={{margin: "0"}}>{item.price}</h4>

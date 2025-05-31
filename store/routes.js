@@ -5,9 +5,9 @@ import Profile from "../pages/Profile.jsx";
 import Catalog from "../pages/Catalog.jsx";
 
 export const publicRoutes = [
-    {path: '/', element: Home},
-    {path: '/profile', element: Profile},
-    {path: '/auth', element: Authorize},
-    {path: '/marketplace', element: Catalog},
-    {path: '*', element: NF}
+    {path: '/', Element: Home},
+    {path: '/profile', Element: Profile},
+    {path: '/auth', Element: Authorize},
+    {path: '/marketplace', Element: Catalog},
+    {path: '*', Element: NF}
 ]

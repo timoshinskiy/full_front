@@ -9,28 +9,27 @@ import actionCreator from "../services/actionCreator.js";
 import Catalog from "../pages/Catalog.jsx";
 
 
-
 const App = () => {
     let {auth} = useSelector(state => state.user);
     const dispatch = useDispatch();
     const data = JSON.parse(sessionStorage.getItem('auth'));
     useEffect(() => {
-        if (data){
-            auth=true;
+        if (data) {
+            auth = true;
             dispatch(actionCreator.login(data));
         }
     }, [])
     return (
         <>
-
-                <Header/>
-                <ToastContainer/>
+            <Header/>
+            <ToastContainer/>
+            {
                 <Routes>
-                    {
-                        publicRoutes.map(item => (
-                            <Route path={item.path} element={<item.element/>}/>
-                        ))}
+                    {publicRoutes.map(({path,Element}) => (
+                    <Route path={path} element={<Element/>}/>
+                    ))}
                 </Routes>
+            }
         </>
     )
 }
